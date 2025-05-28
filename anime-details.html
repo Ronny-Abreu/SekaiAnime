@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Anime Details - Sekai Anime</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/src/icons/favicon.png" type="image/png">
+</head>
+<body>
+    <!-- Navegacion -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="logo-container">
+                    <img src="/src/icons/favicon.png" alt="Sekai Anime" class="logo-icon">
+                    <div class="logo-text">
+                        <span class="brand-text">Sekai</span>
+                        <span class="brand-accent">Anime</span>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto d-flex align-items-center">
+                    <a class="nav-link me-3" href="index.html"><i class="fas fa-home me-2"></i>Inicio</a>
+                    <a class="nav-link me-3" href="index.html#catalog"><i class="fas fa-th-large me-2"></i>Catálogo</a>
+                    <button class="btn btn-outline-light btn-sm" id="profileBtn" onclick="toggleAuthModal()">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal de Autenticación -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Iniciar Sesión / Registrarse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="authForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Recordarme</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    </form>
+                    <hr class="my-4">
+                    <button type="button" class="btn btn-success w-100">Registrarse</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anime Details Section -->
+    <section class="anime-details-section">
+        <div class="details-hero" id="detailsHero">
+            <div class="details-bg"></div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4">
+                        <div class="anime-poster-large">
+                            <img id="animePoster" src="/placeholder.svg?height=600&width=400" alt="Anime Poster" class="poster-img">
+                            <div class="rating-badge" id="animeRating">8.7</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="anime-details-info">
+                            <h1 class="anime-title-large" id="animeTitle">Cargando...</h1>
+                            <div class="anime-meta mb-3">
+                                <span class="badge bg-primary me-2" id="animeType">TV Anime</span>
+                                <span class="text-muted me-2" id="animeYear">2014</span>
+                                <span class="status-badge" id="animeStatus">En emisión</span>
+                            </div>
+                            <div class="anime-genres-large mb-3" id="animeGenres">
+                                <!-- Géneros -->
+                            </div>
+                            <p class="anime-description-large" id="animeDescription">
+                                Cargando descripción...
+                            </p>
+                            <div class="anime-stats mb-4">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Episodios</div>
+                                            <div class="stat-value" id="animeEpisodes">12</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Duración</div>
+                                            <div class="stat-value" id="animeDuration">24 min</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Estudio</div>
+                                            <div class="stat-value" id="animeStudio">Pierrot</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Seguidores</div>
+                                            <div class="stat-value" id="animeFollowers">9678</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary btn-lg me-3" id="watchBtn">
+                                    <i class="fas fa-play me-2"></i>Ver Anime
+                                </button>
+                                <button class="btn btn-outline-light btn-lg" id="favoriteBtn">
+                                    <i class="far fa-heart me-2"></i>Agregar a Favoritos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Episodes Section -->
+        <div class="episodes-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="section-title">Lista de episodios</h3>
+                            <div class="sort-controls d-flex align-items-center gap-3">
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-sort me-1"></i>Mayor a menor
+                                </button>
+                                <div class="search-episodes">
+                                    <input type="text" class="form-control" placeholder="Buscar episodio...">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="episodes-list" id="episodesList">
+                            <!-- episodios -->
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="sidebar-content">
+                            <div class="related-animes mb-4">
+                                <h5 class="mb-3">Animes Relacionados</h5>
+                                <div class="related-grid">
+                                    <div class="related-item" onclick="watchAnime('tokyo-ghoul')">
+                                        <img src="/src/img/TokyoGhoul/tokyo-ghoul-wall.jpg" alt="Tokyo Ghoul √A">
+                                        <div class="related-info">
+                                            <div class="related-title">Tokyo Ghoul √A</div>
+                                            <div class="related-type">Secuela</div>
+                                        </div>
+                                    </div>
+                                    <div class="related-item" onclick="watchAnime('one-piece')">
+                                        <img src="/src/img/OnePiece/Luffy-Wallp.jpg" alt="One Piece Film: Red">
+                                        <div class="related-info">
+                                            <div class="related-title">One Piece Film: Red</div>
+                                            <div class="related-type">Película</div>
+                                        </div>
+                                    </div>
+                                    <div class="related-item" onclick="watchAnime('naruto-shippuden')">
+                                        <img src="/src/img/NarutoShippuden/NarutoShp-wall.jpg" alt="Naruto: The Last">
+                                        <div class="related-info">
+                                            <div class="related-title">Naruto: The Last</div>
+                                            <div class="related-type">Película</div>
+                                        </div>
+                                    </div>
+                                    <div class="related-item" onclick="watchAnime('bleach')">
+                                        <img src="/src/img/Bleach/bleach-wallp.jpg" alt="Bleach: TYBW">
+                                        <div class="related-info">
+                                            <div class="related-title">Bleach: TYBW</div>
+                                            <div class="related-type">Secuela</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="social-stats">
+                                <h5 class="mb-3">Estadísticas Sociales</h5>
+                                <div class="social-buttons">
+                                    <button class="btn btn-facebook">
+                                        <i class="fab fa-facebook-f me-2"></i>Facebook
+                                    </button>
+                                    <button class="btn btn-twitter">
+                                        <i class="fab fa-twitter me-2"></i>Twitter
+                                    </button>
+                                </div>
+                                <div class="rating-display mt-3">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <div class="rating-text">4.5 • 211 VOTOS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="footer-brand">
+                        <h3><span class="brand-text">Sekai</span><span class="brand-accent">Anime</span></h3>
+                        <p class="footer-description">Tu destino definitivo para ver anime en línea. Disfruta de miles de episodios en alta calidad.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-links">
+                        <h5>Enlaces Rápidos</h5>
+                        <ul>
+                            <li><a href="#home">Inicio</a></li>
+                            <li><a href="#catalog">Catálogo</a></li>
+                            <li><a href="#">Géneros</a></li>
+                            <li><a href="#">Populares</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-social">
+                        <h5>Síguenos</h5>
+                        <div class="action-wrap">
+                            <button class="action" type="button">
+                                <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                                </svg>
+                                <span class="action-content" data-content="x"></span>
+                            </button>
+
+                            <button class="action" type="button">
+                                <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
+                                </svg>
+                                <span class="action-content" data-content="github"></span>
+                            </button>
+
+                            <button class="action" type="button">
+                                <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                    <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+                                    <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+                                    <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3"></path>
+                                    <path d="M7 16.5c3.5 1 6.5 1 10 0"></path>
+                                </svg>
+                                <span class="action-content" data-content="discord"></span>
+                            </button>
+
+                            <div class="backdrop"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SekaiAnime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="features.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnimeDetails();
+        });
+    </script>
+</body>
+</html>
