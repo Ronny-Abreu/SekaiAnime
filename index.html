@@ -7,15 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="src/icons/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/src/icons/favicon.png" type="image/png">
 </head>
 <body>
     <!-- Navegacion -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#home">
-                <span class="brand-text">Sekai</span>
-                <span class="brand-accent">Anime</span>
+                <div class="logo-container">
+                    <img src="/src/icons/favicon.png" alt="Sekai Anime" class="logo-icon">
+                    <div class="logo-text">
+                        <span class="brand-text">Sekai</span>
+                        <span class="brand-accent">Anime</span>
+                    </div>
+                </div>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -30,7 +35,7 @@
                     </div>
                     <a class="nav-link me-3" href="#"><i class="fab fa-discord me-2"></i>Discord</a>
                     <a class="nav-link me-3" href="#catalog"><i class="fas fa-th-large me-2"></i>Catálogo de Animes</a>
-                    <button class="btn btn-sm">
+                    <button class="btn btn-outline-light btn-sm" id="profileBtn" onclick="toggleAuthModal()">
                         <i class="fas fa-user"></i>
                     </button>
                 </div>
@@ -38,37 +43,121 @@
         </div>
     </nav>
 
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div class="auth-form" id="loginForm">
+                <h4 class="auth-title">Iniciar Sesión</h4>
+                <form>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control auth-input" placeholder="Ingresa tu usuario">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input type="password" class="form-control auth-input" placeholder="Ingresa tu contraseña" id="loginPassword">
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Recordarme
+                        </label>
+                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="btn btn-auth">Iniciar Sesión</button>
+                </form>
+                <div class="auth-switch">
+                    ¿No tienes una cuenta? <a href="#" onclick="switchToRegister()">Regístrate</a>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <h4 class="auth-title">Registrarse</h4>
+                <form>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Correo Electrónico</label>
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control auth-input" placeholder="Ingresa tu correo">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <input type="text" class="form-control auth-input" placeholder="Ingresa tu usuario">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            <input type="password" class="form-control auth-input" placeholder="Ingresa tu contraseña" id="registerPassword">
+                            <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-auth">Registrarse</button>
+                </form>
+                <div class="auth-switch">
+                    ¿Ya tienes una cuenta? <a href="#" onclick="switchToLogin()">Inicia Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-carousel">
-            <div class="hero-slide active" data-anime="tokyo-ghoul">
-                <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop')"></div>
-                <div class="hero-content">
+    <section id="home" class="hero-section-fullscreen">
+        <div class="hero-carousel-fullscreen">
+            <!-- Tokyo Ghoul Slide -->
+            <div class="hero-slide-fullscreen active" data-anime="tokyo-ghoul">
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/TokyoGhoul/tokyo-ghoul-wall.jpg')"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content-fullscreen">
                     <div class="container">
-                        <div class="row align-items-center">
+                        <div class="row">
                             <div class="col-lg-6">
-                                <h1 class="hero-title">Tokyo Ghoul</h1>
-                                <div class="hero-meta">
-                                    <span class="badge bg-primary me-2">TV Anime</span>
-                                    <span class="text-white me-2">2014</span>
-                                    <span class="status-live">En emisión</span>
+                                <div class="anime-logo-container">
+                                    <img src="/src/img/TokyoGhoul/tokyo-ghoul-logo.jpg" alt="Tokyo Ghoul" class="anime-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <h1 class="hero-title-fallback" style="display: none;">Tokyo Ghoul</h1>
                                 </div>
-                                <div class="hero-genres mb-3">
-                                    <span class="genre-tag">Acción</span>
-                                    <span class="genre-tag">Sobrenatural</span>
-                                    <span class="genre-tag">Drama</span>
+                                <div class="hero-meta-fullscreen">
+                                    <span class="age-rating">16+</span>
+                                    <span class="separator">•</span>
+                                    <span class="audio-options">Sub | Dob</span>
                                 </div>
-                                <p class="hero-description">
-                                    En Tokio, criaturas llamadas "ghouls" han infiltrado la sociedad humana. Kaneki Ken, un estudiante universitario, se convierte en un medio-ghoul después de un encuentro fatal.
+                                <p class="hero-description-fullscreen">
+                                    En Tokio, criaturas llamadas "ghouls" han infiltrado la sociedad humana. Kaneki Ken, un estudiante universitario, se convierte en un medio-ghoul después de un encuentro fatal y debe aprender a vivir entre ambos mundos.
                                 </p>
-                                <button class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>Ver Anime
-                                </button>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="anime-side-image">
-                                    <img src="src/img/TokyoGhoul/tokyo-ghoul-wall.jpg" alt="Tokyo Ghoul" class="side-img">
-                                    <div class="image-gradient"></div>
+                                <div class="hero-buttons-fullscreen">
+                                    <button class="btn btn-watch" onclick="watchAnime('tokyo-ghoul')">
+                                        <i class="fas fa-play me-2"></i>COMENZAR A VER E1
+                                    </button>
+                                    <button class="btn btn-favorite-square" onclick="toggleFavorite('tokyo-ghoul')" data-anime="tokyo-ghoul">
+                                        <i class="far fa-star"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -76,34 +165,33 @@
                 </div>
             </div>
             
-            <div class="hero-slide" data-anime="one-piece">
-                <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop')"></div>
-                <div class="hero-content">
+            <!-- One Piece Slide -->
+            <div class="hero-slide-fullscreen" data-anime="one-piece">
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/OnePiece/Luffy-Wallp.jpg')"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content-fullscreen">
                     <div class="container">
-                        <div class="row align-items-center">
+                        <div class="row">
                             <div class="col-lg-6">
-                                <h1 class="hero-title">One Piece</h1>
-                                <div class="hero-meta">
-                                    <span class="badge bg-primary me-2">TV Anime</span>
-                                    <span class="text-white me-2">1999</span>
-                                    <span class="status-live">En emisión</span>
+                                <div class="anime-logo-container">
+                                    <img src="/src/img/OnePiece/Luffy-logo.png" alt="One Piece" class="anime-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <h1 class="hero-title-fallback" style="display: none;">One Piece</h1>
                                 </div>
-                                <div class="hero-genres mb-3">
-                                    <span class="genre-tag">Aventura</span>
-                                    <span class="genre-tag">Comedia</span>
-                                    <span class="genre-tag">Acción</span>
+                                <div class="hero-meta-fullscreen">
+                                    <span class="age-rating">13+</span>
+                                    <span class="separator">•</span>
+                                    <span class="audio-options">Sub | Dob</span>
                                 </div>
-                                <p class="hero-description">
-                                    Monkey D. Luffy explora el Grand Line con su diversa tripulación de piratas Sombrero de Paja, buscando el tesoro definitivo conocido como "One Piece".
+                                <p class="hero-description-fullscreen">
+                                    Monkey D. Luffy explora el Grand Line con su diversa tripulación de piratas Sombrero de Paja, buscando el tesoro definitivo conocido como "One Piece" para convertirse en el próximo Rey de los Piratas.
                                 </p>
-                                <button class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>Ver Anime
-                                </button>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="anime-side-image">
-                                    <img src="src/img/OnePiece/Luffy-Wallp.jpg" alt="One Piece" class="side-img">
-                                    <div class="image-gradient"></div>
+                                <div class="hero-buttons-fullscreen">
+                                    <button class="btn btn-watch" onclick="watchAnime('one-piece')">
+                                        <i class="fas fa-play me-2"></i>COMENZAR A VER E1
+                                    </button>
+                                    <button class="btn btn-favorite-square" onclick="toggleFavorite('one-piece')" data-anime="one-piece">
+                                        <i class="far fa-star"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -111,34 +199,33 @@
                 </div>
             </div>
 
-            <div class="hero-slide" data-anime="naruto-shippuden">
-                <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop')"></div>
-                <div class="hero-content">
+            <!-- Naruto Shippuden Slide -->
+            <div class="hero-slide-fullscreen" data-anime="naruto-shippuden">
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/NarutoShippuden/NarutoShp-wall.jpg')"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content-fullscreen">
                     <div class="container">
-                        <div class="row align-items-center">
+                        <div class="row">
                             <div class="col-lg-6">
-                                <h1 class="hero-title">Naruto Shippuden</h1>
-                                <div class="hero-meta">
-                                    <span class="badge bg-primary me-2">TV Anime</span>
-                                    <span class="text-white me-2">2007</span>
-                                    <span class="status-live">Finalizado</span>
+                                <div class="anime-logo-container">
+                                    <img src="/src/img/NarutoShippuden/NarutoShp-logo.png" alt="Naruto Shippuden" class="anime-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <h1 class="hero-title-fallback" style="display: none;">Naruto Shippuden</h1>
                                 </div>
-                                <div class="hero-genres mb-3">
-                                    <span class="genre-tag">Acción</span>
-                                    <span class="genre-tag">Aventura</span>
-                                    <span class="genre-tag">Artes Marciales</span>
+                                <div class="hero-meta-fullscreen">
+                                    <span class="age-rating">13+</span>
+                                    <span class="separator">•</span>
+                                    <span class="audio-options">Sub | Dob</span>
                                 </div>
-                                <p class="hero-description">
-                                    Naruto Uzumaki regresa después de dos años y medio de entrenamiento con nuevas habilidades y una determinación más fuerte para salvar a su amigo Sasuke.
+                                <p class="hero-description-fullscreen">
+                                    Naruto Uzumaki regresa después de dos años y medio de entrenamiento con nuevas habilidades y una determinación más fuerte para salvar a su amigo Sasuke mientras enfrenta la organización Akatsuki.
                                 </p>
-                                <button class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>Ver Anime
-                                </button>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="anime-side-image">
-                                    <img src="src/img/NarutoShippuden/NarutoShp-wall.jpg" alt="Naruto Shippuden" class="side-img">
-                                    <div class="image-gradient"></div>
+                                <div class="hero-buttons-fullscreen">
+                                    <button class="btn btn-watch" onclick="watchAnime('naruto-shippuden')">
+                                        <i class="fas fa-play me-2"></i>COMENZAR A VER E1
+                                    </button>
+                                    <button class="btn btn-favorite-square" onclick="toggleFavorite('naruto-shippuden')" data-anime="naruto-shippuden">
+                                        <i class="far fa-star"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -146,34 +233,33 @@
                 </div>
             </div>
 
-            <div class="hero-slide" data-anime="bleach">
-                <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop')"></div>
-                <div class="hero-content">
+            <!-- Bleach Slide -->
+            <div class="hero-slide-fullscreen" data-anime="bleach">
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/Bleach/bleach-wallp.jpg')"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content-fullscreen">
                     <div class="container">
-                        <div class="row align-items-center">
+                        <div class="row">
                             <div class="col-lg-6">
-                                <h1 class="hero-title">Bleach</h1>
-                                <div class="hero-meta">
-                                    <span class="badge bg-primary me-2">TV Anime</span>
-                                    <span class="text-white me-2">2004</span>
-                                    <span class="status-live">En emisión</span>
+                                <div class="anime-logo-container">
+                                    <img src="/src/img/Bleach/bleach-logo.png" alt="Bleach" class="anime-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <h1 class="hero-title-fallback" style="display: none;">Bleach</h1>
                                 </div>
-                                <div class="hero-genres mb-3">
-                                    <span class="genre-tag">Acción</span>
-                                    <span class="genre-tag">Sobrenatural</span>
-                                    <span class="genre-tag">Aventura</span>
+                                <div class="hero-meta-fullscreen">
+                                    <span class="age-rating">16+</span>
+                                    <span class="separator">•</span>
+                                    <span class="audio-options">Sub | Dob</span>
                                 </div>
-                                <p class="hero-description">
-                                    Ichigo Kurosaki obtiene los poderes de un Shinigami y debe proteger el mundo humano de los espíritus malignos llamados Hollows.
+                                <p class="hero-description-fullscreen">
+                                    Ichigo Kurosaki obtiene los poderes de un Shinigami y debe proteger el mundo humano de los espíritus malignos llamados Hollows, mientras descubre secretos sobre el mundo espiritual.
                                 </p>
-                                <button class="btn btn-primary btn-lg">
-                                    <i class="fas fa-play me-2"></i>Ver Anime
-                                </button>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="anime-side-image">
-                                    <img src="src/img/Bleach/bleach-wallp.jpg" alt="Bleach" class="side-img">
-                                    <div class="image-gradient"></div>
+                                <div class="hero-buttons-fullscreen">
+                                    <button class="btn btn-watch" onclick="watchAnime('bleach')">
+                                        <i class="fas fa-play me-2"></i>COMENZAR A VER E1
+                                    </button>
+                                    <button class="btn btn-favorite-square" onclick="toggleFavorite('bleach')" data-anime="bleach">
+                                        <i class="far fa-star"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -182,13 +268,20 @@
             </div>
         </div>
         
-        <div class="hero-controls">
-            <button class="hero-nav-btn prev" onclick="changeSlide(-1)">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="hero-nav-btn next" onclick="changeSlide(1)">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        <!-- Navigation Arrows -->
+        <button class="carousel-nav-btn carousel-prev" onclick="changeSlideFullscreen(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav-btn carousel-next" onclick="changeSlideFullscreen(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Slide Indicators -->
+        <div class="slide-indicators">
+            <button class="indicator active" onclick="goToSlide(0)"></button>
+            <button class="indicator" onclick="goToSlide(1)"></button>
+            <button class="indicator" onclick="goToSlide(2)"></button>
+            <button class="indicator" onclick="goToSlide(3)"></button>
         </div>
     </section>
 
@@ -209,12 +302,13 @@
             <div class="row" id="catalogContainer">
                 <!-- Tokyo Ghoul Card -->
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" data-genres="accion,sobrenatural,drama">
-                    <div class="anime-card">
+                    <div class="anime-card tokyo-ghoul-card" onclick="goToAnimeDetails('tokyo-ghoul')">
                         <div class="anime-poster" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop')">
                             <div class="character-image">
-                                <img src="src/img/TokyoGhoul/kaneki-ken-main.png" alt="Kaneki Ken" class="character-png">
+                                <img src="/src/img/TokyoGhoul/kaneki-ken-main.png" alt="Kaneki Ken" class="character-png">
                             </div>
                             <div class="anime-rating">8.7</div>
+                            <div class="neon-glow tokyo-ghoul-glow"></div>
                         </div>
                         <div class="anime-info">
                             <div class="anime-title">Tokyo Ghoul</div>
@@ -230,12 +324,13 @@
 
                 <!-- One Piece Card -->
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" data-genres="aventura,accion">
-                    <div class="anime-card">
+                    <div class="anime-card one-piece-card" onclick="goToAnimeDetails('one-piece')">
                         <div class="anime-poster" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop')">
                             <div class="character-image">
-                                <img src="src/img/OnePiece/luffy-Main.png" alt="Monkey D. Luffy" class="character-png">
+                                <img src="/src/img/OnePiece/luffy-Main.png" alt="Monkey D. Luffy" class="character-png">
                             </div>
                             <div class="anime-rating">9.0</div>
+                            <div class="neon-glow one-piece-glow"></div>
                         </div>
                         <div class="anime-info">
                             <div class="anime-title">One Piece</div>
@@ -251,12 +346,13 @@
 
                 <!-- Naruto Shippuden Card -->
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" data-genres="accion,aventura">
-                    <div class="anime-card">
+                    <div class="anime-card naruto-card" onclick="goToAnimeDetails('naruto-shippuden')">
                         <div class="anime-poster" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop')">
                             <div class="character-image">
-                                <img src="src/img/NarutoShippuden/NarutoShppdn-Main.png" alt="Naruto Uzumaki" class="character-png">
+                                <img src="/src/img/NarutoShippuden/NarutoShppdn-Main.png" alt="Naruto Uzumaki" class="character-png">
                             </div>
                             <div class="anime-rating">8.9</div>
+                            <div class="neon-glow naruto-glow"></div>
                         </div>
                         <div class="anime-info">
                             <div class="anime-title">Naruto Shippuden</div>
@@ -272,12 +368,13 @@
 
                 <!-- Bleach Card -->
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4" data-genres="accion,sobrenatural,aventura">
-                    <div class="anime-card">
+                    <div class="anime-card bleach-card" onclick="goToAnimeDetails('bleach')">
                         <div class="anime-poster" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop')">
                             <div class="character-image">
-                                <img src="src/img/Bleach/Bleach-Main.png" alt="Ichigo Kurosaki" class="character-png">
+                                <img src="/src/img/Bleach/Bleach-Main.png" alt="Ichigo Kurosaki" class="character-png">
                             </div>
                             <div class="anime-rating">8.5</div>
+                            <div class="neon-glow bleach-glow"></div>
                         </div>
                         <div class="anime-info">
                             <div class="anime-title">Bleach</div>
@@ -293,6 +390,70 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="footer-brand">
+                        <h3><span class="brand-text">Sekai</span><span class="brand-accent">Anime</span></h3>
+                        <p class="footer-description">Tu destino definitivo para ver anime en línea. Disfruta de miles de episodios en alta calidad.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-links">
+                        <h5>Enlaces Rápidos</h5>
+                        <ul>
+                            <li><a href="#home">Inicio</a></li>
+                            <li><a href="#catalog">Catálogo</a></li>
+                            <li><a href="#">Géneros</a></li>
+                            <li><a href="#">Populares</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                  <div class="action-wrap">
+    <button class="action" type="button">
+      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+        <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+      </svg>
+      <span class="action-content" data-content="x"></span>
+    </button>
+
+    <button class="action" type="button">
+      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+        <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
+      </svg>
+      <span class="action-content" data-content="github"></span>
+    </button>
+
+    <button class="action" type="button">
+      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+        <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+        <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+        <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3"></path>
+        <path d="M7 16.5c3.5 1 6.5 1 10 0"></path>
+      </svg>
+      <span class="action-content" data-content="discord"></span>
+    </button>
+
+    <div class="backdrop"></div>
+  </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>&copy; 2024 Sekai Anime. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="features.js"></script>
