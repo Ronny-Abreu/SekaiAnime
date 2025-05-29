@@ -133,7 +133,7 @@
         <div class="hero-carousel-fullscreen">
             <!-- Tokyo Ghoul Slide -->
             <div class="hero-slide-fullscreen active" data-anime="tokyo-ghoul">
-                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/TokyoGhoul/tokyo-ghoul-wall.jpg')"></div>
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/TokyoGhoul/tokyo-ghoul-wall.webp')"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content-fullscreen">
                     <div class="container">
@@ -167,7 +167,7 @@
             
             <!-- One Piece Slide -->
             <div class="hero-slide-fullscreen" data-anime="one-piece">
-                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/OnePiece/Luffy-Wallp.jpg')"></div>
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/OnePiece/Luffy-Wallp.webp')"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content-fullscreen">
                     <div class="container">
@@ -201,7 +201,7 @@
 
             <!-- Naruto Shippuden Slide -->
             <div class="hero-slide-fullscreen" data-anime="naruto-shippuden">
-                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/NarutoShippuden/NarutoShp-wall.jpg')"></div>
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/NarutoShippuden/NarutoShp-wall.webp')"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content-fullscreen">
                     <div class="container">
@@ -235,7 +235,7 @@
 
             <!-- Bleach Slide -->
             <div class="hero-slide-fullscreen" data-anime="bleach">
-                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/Bleach/bleach-wallp.jpg')"></div>
+                <div class="hero-bg-fullscreen" style="background-image: url('/src/img/Bleach/bleach-wallp.webp')"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-content-fullscreen">
                     <div class="container">
@@ -394,7 +394,7 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <div class="row">
+            <div class="row" id="containerFooter">
                 <div class="col-lg-6">
                     <div class="footer-brand">
                         <h3><span class="brand-text">Sekai</span><span class="brand-accent">Anime</span></h3>
@@ -413,42 +413,42 @@
                     </div>
                 </div>
 
-                  <div class="action-wrap">
-    <button class="action" type="button">
-      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
-        <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
-        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
-      </svg>
-      <span class="action-content" data-content="x"></span>
-    </button>
+                <div class="action-wrap">
+                        <button class="action" type="button">
+                            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                            </svg>
+                            <span class="action-content" data-content="x"></span>
+                        </button>
 
-    <button class="action" type="button">
-      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
-        <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
-      </svg>
-      <span class="action-content" data-content="github"></span>
-    </button>
+                        <button class="action" type="button">
+                            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
+                            </svg>
+                            <span class="action-content" data-content="github"></span>
+                        </button>
 
-    <button class="action" type="button">
-      <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-        stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
-        <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
-        <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
-        <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3"></path>
-        <path d="M7 16.5c3.5 1 6.5 1 10 0"></path>
-      </svg>
-      <span class="action-content" data-content="discord"></span>
-    </button>
+                        <button class="action" type="button">
+                            <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none">
+                                <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+                                <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"></path>
+                                <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3"></path>
+                                <path d="M7 16.5c3.5 1 6.5 1 10 0"></path>
+                            </svg>
+                            <span class="action-content" data-content="discord"></span>
+                        </button>
 
-    <div class="backdrop"></div>
-  </div>
+                        <div class="backdrop"></div>
+                </div>
             </div>
             <div class="footer-bottom">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p>&copy; 2024 Sekai Anime. Todos los derechos reservados.</p>
+                        <p>&copy; 2025 Sekai Anime. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </div>

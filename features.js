@@ -11,7 +11,7 @@ const animesData = {
     status: "En emisión",
     year: "2014",
     rating: "8.7",
-    image: "/src/img/TokyoGhoul/tokyo-ghoul-wall.jpg",
+    image: "/src/img/TokyoGhoul/tokyo-ghoul-wall.webp",
     video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
     description:
       "Tokyo Ghoul sigue la historia de Ken Kaneki, un estudiante universitario que se convierte en un medio-ghoul después de un encuentro fatal. Debe aprender a vivir entre el mundo humano y el mundo de los ghouls, criaturas que se alimentan de carne humana. La serie explora temas de identidad, supervivencia y la delgada línea entre la humanidad y la monstruosidad.",
@@ -35,7 +35,7 @@ const animesData = {
     status: "En emisión",
     year: "1999",
     rating: "9.0",
-    image: "/src/img/OnePiece/Luffy-Wallp.jpg",
+    image: "/src/img/OnePiece/Luffy-Wallp.webp",
     video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
     description:
       "One Piece narra las aventuras de Monkey D. Luffy, un joven pirata que busca el tesoro más grande del mundo conocido como 'One Piece' para convertirse en el próximo Rey de los Piratas. Junto a su tripulación de los Sombreros de Paja, explora el Grand Line enfrentando enemigos poderosos y descubriendo secretos del mundo.",
@@ -64,7 +64,7 @@ const animesData = {
     status: "Finalizado",
     year: "2007",
     rating: "8.9",
-    image: "/src/img/NarutoShippuden/NarutoShp-wall.jpg",
+    image: "/src/img/NarutoShippuden/NarutoShp-wall.webp",
     video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
     description:
       "Naruto Shippuden continúa la historia de Naruto Uzumaki después de un entrenamiento de dos años y medio. Ahora más fuerte, busca rescatar a su amigo Sasuke mientras enfrenta la organización criminal Akatsuki que amenaza la paz del mundo ninja. La serie profundiza en el pasado de los personajes y presenta batallas épicas.",
@@ -88,7 +88,7 @@ const animesData = {
     status: "En emisión",
     year: "2004",
     rating: "8.5",
-    image: "/src/img/Bleach/bleach-wallp.jpg",
+    image: "/src/img/Bleach/bleach-wallp.webp",
     video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
     description:
       "Bleach sigue a Ichigo Kurosaki, un adolescente que obtiene poderes de Shinigami (Dios de la Muerte) y debe proteger a los humanos de los espíritus malignos llamados Hollows, mientras descubre secretos sobre el mundo espiritual. La serie combina acción sobrenatural con desarrollo de personajes profundo.",
@@ -105,6 +105,8 @@ const animesData = {
 
 // Variables globales
 let currentSlideFullscreen = 0
+let currentSlide = 0;
+const totalSlides = 4;
 const totalSlidesFullscreen = 4
 const favorites = JSON.parse(localStorage.getItem("favorites")) || []
 
@@ -116,6 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFilters()
     startCarouselFullscreen()
     updateFavoriteButtons()
+    startCarousel()
+    setupMobileMenuClose()
+    setupMobileMenuClose()
   }
 })
 
@@ -214,7 +219,6 @@ function toggleFavorite(animeId) {
   localStorage.setItem("favorites", JSON.stringify(favorites))
   updateFavoriteButtons()
 
-  // Mostrar notificación
   const anime = animesData[animeId]
   const message = favorites.includes(animeId)
     ? `${anime.title} agregado a favoritos`
@@ -470,3 +474,136 @@ document.addEventListener("keydown", (event) => {
     document.getElementById("authModal").classList.remove("show")
   }
 })
+
+function setupMobileMenuClose() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const navbar = document.querySelector('.navbar-collapse');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            }
+        });
+    });
+    
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navbar.contains(event.target);
+        const isToggleButton = event.target.closest('.navbar-toggler');
+        
+        if (!isClickInsideNav && !isToggleButton && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+        }
+    });
+}
+
+//carrusel automático
+function startCarousel() {
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+}
+
+// slide del carrusel
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.hero-slide');
+    
+    slides[currentSlide].classList.remove('active');
+    
+    currentSlide += direction;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    
+    slides[currentSlide].classList.add('active');
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const animeCards = document.querySelectorAll('.anime-card');
+        
+        animeCards.forEach(card => {
+            const title = card.querySelector('.anime-title').textContent.toLowerCase();
+            const parent = card.closest('.col-lg-3');
+            
+            if (title.includes(searchTerm)) {
+                parent.style.display = 'block';
+            } else {
+                parent.style.display = 'none';
+            }
+        });
+    });
+}
+
+// filtros busqda
+function setupFilters() {
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            const animeCards = document.querySelectorAll('[data-genres]');
+            animeCards.forEach(card => {
+                const genres = card.getAttribute('data-genres');
+                const parent = card;
+                
+                if (filter === 'all' || genres.includes(filter)) {
+                    parent.style.display = 'block';
+                } else {
+                    parent.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+function setupMobileMenuClose() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const profileBtn = document.getElementById('profileBtn');
+    const navbar = document.querySelector('.navbar-collapse');
+    
+    // Función para cerrar el menú
+    function closeMenu() {
+        if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+        }
+    }
+    
+    // Cerrar menú al hacer clic en cualquier enlace de navegación
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeMenu();
+        });
+    });
+    
+    if (profileBtn) {
+        profileBtn.addEventListener('click', function() {
+            closeMenu();
+        });
+    }
+    
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navbar.contains(event.target);
+        const isToggleButton = event.target.closest('.navbar-toggler');
+        
+        if (!isClickInsideNav && !isToggleButton && navbarCollapse.classList.contains('show')) {
+            closeMenu();
+        }
+    });
+}
