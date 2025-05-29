@@ -1447,7 +1447,7 @@ body {
     
     .action-wrap {
         justify-content: flex-end;
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
     }
 }
@@ -1470,7 +1470,7 @@ body {
     
     .action-wrap {
         justify-content: flex-end;
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
         align-items: flex-end;
     }
